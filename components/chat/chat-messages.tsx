@@ -8,6 +8,7 @@ import { Fragment , useRef, ElementRef } from "react";
 import { format } from "date-fns";
 import { ChatItem } from "./chat-item";
 import { usechatSocket } from "@/hooks/use-chat-socket";
+import { useChatScroll } from "@/hooks/use-chat-scroll";
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
@@ -54,6 +55,13 @@ export const ChatMessages = ({
       paramValue,
   });
   usechatSocket({queryKey, addKey,updateKey})
+  useChatScroll({
+      chatRef,
+      bottomRef,
+      shouldLoadMore:!isFetchingNextPage && !! hasNextPage,
+      loadMore: fetchNextPage,
+      count: data?.pages?.[0]?.items?.length ?? 0,
+  })
   if(status === "pending"){
       return ( 
       <div className="flex flex-col flex-1 justify-center">
@@ -89,7 +97,7 @@ export const ChatMessages = ({
         ) : (
           <button
           onClick={() => fetchNextPage()}
-          className="flex items-center gap-x-2 text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-500"
+          className="text-zinc-500 hover:text-inc-600 dark:text-zinc-400 text-xs my-4 dark:hover:text-zinc-300 transition"
           >
             Load more
           </button>
