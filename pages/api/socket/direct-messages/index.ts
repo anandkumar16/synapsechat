@@ -22,16 +22,50 @@ export default async function handler(req:NextApiRequest, res:NextApiResponseSer
         return res.status(400).json({error:"Content or fileUrl is required"});
     }
   
+    const conversation = await db.conversation.findFirst({
+        where:{
+            id:conversationId as string,
+            OR:[
+                {
+                    memberOne:{
+                        profileId:profile.id
+                    }
+                },
+                {
+                    memberTwo:{
+                        profileId:profile.id
+                    }
+                }
+            ]      
+        },
+        include:{
+            memberOne:{
+                include:{
+                    profile:true
+                }
+            },
+            memberTwo:{
+                include:{
+                    profile:true
+                }
+            }
+        }
+    });
 
-    const member = server.members.find((member) => member.profileId === profile.id);
+    if(!conversation){
+        return res.status(404).json({error:"Conversation not found"});
+    }4
+    const member = conversation.memberOne.profileId === profile.id ? conversation.memberOne : conversation.memberTwo;
+
+    
     if(!member){
         return res.status(403).json({error:"Forbidden"});
     }
-    const message = await db.message.create({
+    const message = await db.directMessage.create({
         data:{
             content,
             fileUrl,
-            channelId:channelId as string,
+            conversationId:conversation.id as string,
             memberId:member.id
         },
         include:{
@@ -42,11 +76,12 @@ export default async function handler(req:NextApiRequest, res:NextApiResponseSer
             }
         }
     });
-    const channelKey = `chat:${channelId}:messages`;
+
+    const channelKey = `chat:${conversationId}:messages`;
     res?.socket?.server?.io?.emit(channelKey, message);
     return res.status(200).json({message});
  } catch (error) {
-    console.log(error);
+    console.log("DIRECT_MESSAGE",error);
     return res.status(500).json({error:"Something went wrong"});
  }
 }
