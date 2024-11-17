@@ -117,7 +117,7 @@ export const ChatItem = ({
       </div>
       <div className="flex flex-col w-full">
       <div className="flex items-center gap-x-2">
-        <div className="cflex items-center">
+        <div className="flex items-center">
         <p
         onClick={onMemberClick}
         className="font-semibold text-sm hover:underline cursor-pointer">

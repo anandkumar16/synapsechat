@@ -64,7 +64,7 @@ export const ChatMessages = ({
   })
   if(status === "pending"){
       return ( 
-      <div className="flex flex-col flex-1 justify-center">
+      <div className="flex flex-col flex-1 justify-center items-center">
         <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4"/>
         <p className="text-xs text-zinc-500 dark:text-zinc-400">
           Loading...
@@ -74,7 +74,7 @@ export const ChatMessages = ({
   }
   if(status === "error"){
     return ( 
-    <div className="flex flex-col flex-1 justify-center">
+    <div className="flex flex-col flex-1 justify-center items-center">
       <ServerCrash className="h-7 w-7 text-zinc-500 animate-spin my-4"/>
       <p className="text-xs text-zinc-500 dark:text-zinc-400">
         something went wrong

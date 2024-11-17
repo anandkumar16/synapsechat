@@ -31,11 +31,11 @@ export const ChatHeader = ({
         <p className="font-semibold text-md text-black dark:text-white">
             {name}
         </p>
-        <div className="ml-auto flex items-center">
+        <div className="ml-auto flex items-center space-x-4">
             {type === 'conversation' && (
                 <ChatVideoButton/>
             )}
-            <SocketIndicator/>
+            <SocketIndicator />
         </div>
     </div>
   )
