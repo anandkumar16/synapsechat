@@ -1,4 +1,4 @@
-import { DELETE } from "@/app/api/channels/[channelId]/route";
+
 import { currentProfilePages } from "@/lib/current-profile-pages";
 import { db } from "@/lib/db";
 import { NextApiResponseServerIo } from "@/types";
@@ -55,7 +55,7 @@ export default async function handler(
         if(!member){
             return res.status(404).json({error:"Forbidden"});
         }
-        let message = await db.message.findFirst({
+        const message = await db.message.findFirst({
             where:{
                 id:messageId as string,
                 channelId:channelId as string

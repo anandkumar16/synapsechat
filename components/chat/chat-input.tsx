@@ -12,7 +12,7 @@ import {
     FormItem,
 } from "@/components/ui/form";
 
-import { Plus, Smile } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Input } from "../ui/input";
 import { useModal } from "@/hooks/use-modal-store";
 import { EmojiPicker } from "../emoji-picker";
@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 
 interface ChatInputProps {
     apiUrl : string;
-    query: Record<string,any>;
+    query: Record<string, string | string[] | undefined>;
     name:string;
     type: "conversation" | "channel";
 }

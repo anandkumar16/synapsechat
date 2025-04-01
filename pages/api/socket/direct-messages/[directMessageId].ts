@@ -1,4 +1,4 @@
-import { DELETE } from "@/app/api/channels/[channelId]/route";
+
 import { currentProfilePages } from "@/lib/current-profile-pages";
 import { db } from "@/lib/db";
 import { NextApiResponseServerIo } from "@/types";

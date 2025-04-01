@@ -54,7 +54,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponseSer
 
     if(!conversation){
         return res.status(404).json({error:"Conversation not found"});
-    }4
+    }
     const member = conversation.memberOne.profileId === profile.id ? conversation.memberOne : conversation.memberTwo;
 
     

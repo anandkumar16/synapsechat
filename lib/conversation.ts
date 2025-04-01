@@ -33,6 +33,7 @@ const findConversation = async (memberOneId:string,memberTwoId:string) => {
         }
     });
 }catch(error){
+    console.error("Error finding conversation:", error);
     return null;
 }
 }
@@ -59,6 +60,7 @@ const createNewConversation = async (memberOneId:string,memberTwoId:string) => {
             }
         })
     } catch (error) {
+        console.error("Error creating conversation:", error);
         return null;
     }
 }
