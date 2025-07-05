@@ -52,7 +52,7 @@ export const LeaveServerModal = () => {
             <div className="flex items-center justify-between w-full">
            <Button
            disabled={isLoading}
-              onClick={()=>{}}
+              onClick={onClose}
               variant={"ghost"}
            >
                 Cancel
